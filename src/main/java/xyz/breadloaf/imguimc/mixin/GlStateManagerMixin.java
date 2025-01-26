@@ -12,6 +12,10 @@ public class GlStateManagerMixin {
 
     @WrapMethod(method = "_viewport")
     private static void viewport(int i, int j, int k, int l, Operation<Void> original) {
+        if (!WindowScaling.isChanged()) {
+            original.call(i, j, k, l);
+            return;
+        }
         original.call(WindowScaling.X_OFFSET, WindowScaling.Y_TOP_OFFSET, WindowScaling.WIDTH, WindowScaling.HEIGHT);
     }
 

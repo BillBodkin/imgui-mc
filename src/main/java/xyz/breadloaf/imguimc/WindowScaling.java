@@ -81,9 +81,14 @@ public class WindowScaling {
         return new Vector2d(width, height);
     }
 
-    public static void update() {
+    public static boolean isChanged() {
         Window window = getGameWindow();
-        DISABLE_POST_PROCESSORS = !(window.getWidth() == WIDTH && window.getHeight() == HEIGHT && X_OFFSET == 0 && Y_OFFSET == 0);
+        return !(window.getWidth() == WIDTH && window.getHeight() == HEIGHT && X_OFFSET == 0 && Y_OFFSET == 0);
+    }
+
+
+    public static void update() {
+        DISABLE_POST_PROCESSORS = isChanged();
     }
 
 }
